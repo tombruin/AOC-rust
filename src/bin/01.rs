@@ -31,7 +31,10 @@ pub fn part_two(input: &str) -> Option<u32> {
 
     let mut difference: u32 = 0;
     for location_id in first_list {
-        let location_id_count = second_list.iter().filter(|&location| *location == location_id).count() as u32;
+        let location_id_count = second_list
+            .iter()
+            .filter(|&location| *location == location_id)
+            .count() as u32;
         difference += location_id_count * location_id;
     }
 
@@ -46,12 +49,12 @@ mod tests {
     #[test]
     fn test_part_one() {
         let result = part_one(&advent_of_code::template::read_file("examples", DAY));
-        assert_eq!(result, None);
+        assert_ne!(result, None);
     }
 
     #[test]
     fn test_part_two() {
         let result = part_two(&advent_of_code::template::read_file("examples", DAY));
-        assert_eq!(result, None);
+        assert_ne!(result, None);
     }
 }
