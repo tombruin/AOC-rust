@@ -3,8 +3,8 @@ advent_of_code::solution!(5);
 use std::{cmp::Ordering, collections::HashMap};
 
 pub fn part_one(input: &str) -> Option<u32> {
-    let mut splitted_input: std::str::Split<'_, &str> = input.split("\n\n");
-    let mut rules_map: HashMap<_, Vec<_>> = splitted_input.next().unwrap().lines().fold(HashMap::new(), |mut ordering_rules, rule| {
+    let (input_ordering, input_updates) = input.split_once("\n\n").unwrap();
+    let mut rules_map: HashMap<_, Vec<_>> = input_ordering.lines().fold(HashMap::new(), |mut ordering_rules, rule| {
         let mut splitted_rules = rule.split('|');
         ordering_rules
             .entry(splitted_rules.next().unwrap().parse::<usize>().unwrap())
@@ -17,7 +17,7 @@ pub fn part_one(input: &str) -> Option<u32> {
     rules_map.values_mut().for_each(|page_before| page_before.sort_unstable());
     // println!("rules_map: {:?}", rules_map);
 
-    let answer = splitted_input.next().unwrap().lines().map(|updates| {
+    let answer = input_updates.lines().map(|updates| {
         updates
             .split(',')
             .map(|update| update.parse::<usize>().unwrap())
@@ -44,8 +44,8 @@ pub fn part_one(input: &str) -> Option<u32> {
 }
 
 pub fn part_two(input: &str) -> Option<u32> {
-    let mut splitted_input: std::str::Split<'_, &str> = input.split("\n\n");
-    let mut rules_map: HashMap<_, Vec<_>> = splitted_input.next().unwrap().lines().fold(HashMap::new(), |mut ordering_rules, rule| {
+    let (input_ordering, input_updates) = input.split_once("\n\n").unwrap();
+    let mut rules_map: HashMap<_, Vec<_>> = input_ordering.lines().fold(HashMap::new(), |mut ordering_rules, rule| {
         let mut splitted_rules = rule.split('|');
         ordering_rules
             .entry(splitted_rules.next().unwrap().parse::<usize>().unwrap())
@@ -58,7 +58,7 @@ pub fn part_two(input: &str) -> Option<u32> {
     rules_map.values_mut().for_each(|page_before| page_before.sort_unstable());
     // println!("rules_map: {:?}", rules_map);
 
-    let answer = splitted_input.next().unwrap().lines().map(|updates| {
+    let answer = input_updates.lines().map(|updates| {
         updates
             .split(',')
             .map(|update| update.parse::<usize>().unwrap())
